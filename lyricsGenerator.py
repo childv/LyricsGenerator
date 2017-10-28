@@ -8,6 +8,7 @@ Driver program for our lyrics generator.
 '''
 
 import re
+import sys
 
 
 class UserInput:
@@ -15,8 +16,8 @@ class UserInput:
 	Outputs user input in a dictionary format of part in speech:list of words format
 	'''
 	def __init__(self):
-		self.input = {}
-		self.invalid_chars = re.compile("[^a-zA-Z-]")
+		self.d_input = None
+		self.invalid_chars = re.compile("[^a-zA-Z]")
 
 	# Ensures input has no numbers or grammars
 	def isValidInput(self, ls_str):
@@ -25,8 +26,9 @@ class UserInput:
 				return False
 		return True
 
+
 	# Initiates user input
-	def getInput(self):
+	def askForUserInput(self):
 		print('''
 	Welcome to the NLP Lyrics Generator!
 	Generating the next greatest hit since 2017.
@@ -39,6 +41,7 @@ class UserInput:
 		ls_input_nouns = []
 
 		userInputsVerbs = userInputsNouns = True
+		self.d_input = {'verbs':[], 'nouns':[]} # reset user input
 
 
 		# Main loop to get input
@@ -47,9 +50,10 @@ class UserInput:
 			while userInputsVerbs:
 				input_verbs = input("Enter up to three verbs separated by spaces, or 0 to exit: ")
 				input_verbs.strip()
-				if input_verbs == '0':
-					break
-				ls_input_verbs = input_verbs.split(" ")
+				# Check if exit
+				if input_verbs.strip() == '0':
+					sys.exit()
+				ls_input_verbs = input_verbs.strip().split(" ")
 				
 				# More than 3 verbs
 				if len(ls_input_verbs) > 3:
@@ -61,12 +65,18 @@ class UserInput:
 					if not self.isValidInput(ls_input_verbs):
 						print("Invalid character detected in input. Please try again.")
 					else:
+						# Add verbs to input dictionary
+						self.d_input['verbs'] = ls_input_verbs
 						userInputsVerbs = False
 
 			# Get nouns
 			while userInputsNouns:
 				input_nouns = input("Enter up to three nouns separated by spaces, or 0 to exit: ")
-				ls_input_nouns = input_nouns.split(" ")
+				
+				# Check if exit
+				if input_nouns.strip() == '0':
+					sys.exit()
+				ls_input_nouns = input_nouns.strip().split(" ")
 				
 				# More than 3 verbs
 				if len(ls_input_nouns) > 3:
@@ -78,18 +88,33 @@ class UserInput:
 					if not self.isValidInput(ls_input_nouns):
 						print("Invalid character detected in input. Please try again.")
 					else:
+						# Add nouns to input dictionary
+						self.d_input['nouns'] = ls_input_nouns
 						userInputsNouns = False
+			print('\n')
 			break
 
+	# Returns dictionary containing user input
+	def getUserInput(self):
+		if self.d_input is not None:
+			return self.d_input
 
-
+		# Request user input if none
+		else:
+			self.askForUserInput()
+			return self.d_input
 
 
 
 
 def main():
 	user_input = UserInput()
-	user_input.getInput()
+	user_input.askForUserInput()
+	
+
+	# Do some awesome thing with the user input
+	handler = lyr
+
 
 if __name__ == '__main__':
 	main()

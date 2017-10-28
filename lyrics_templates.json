@@ -1,0 +1,41 @@
+[
+	{
+		"layout": {
+			"verbs": 2,
+			"nouns": 1,
+			"form": ["V1", "C1", "V2", "C1"]
+		},
+		"parts": {
+			"V1":["I got a ",  "<N1>", " that I really need \n My ", "<N1>", " is what I breathe \n But my ", "<N1>", " don't love me, so I gotta leave"],
+			"C1": ["Oh ", "<N1>", " oh ", "<N1>", " don't you see me ", "<V1>",  "\n Oh ", "<N1>", " oh ", "<N1>", " when you ", "<V2>",  " it makes me blue \n Oh ", "<N1>", " oh ", "<N1>", " I'm ", "<V1>", "ing over how you ", "<V2>"],
+			"V2": ["My ", "<N1>",  " once needed me \n My ", "<N1>",  " once loved me \n But when you see your ", "<N1>", " ", "<V2>", " you'll understand - you gotta leave too"]
+		}
+	},
+	{
+		"layout": {
+			"verbs": 2,
+			"nouns": 3,
+			"form": ["V1", "C1", "V2"]
+		},
+		"parts": {
+			"V1": ["I waited by your ", "<N1>",  " for an hour or more \n But you didn't ", "<V1>",  "\n I promise I'm not a ", "<N2>",  "\n But something about you makes me want to ", "<V2>"],
+			"C1": ["When you're not ", "<V1>",  "ing with me, baby I feel so low \n I turn into a ", "<N2>",  " in a ", "<N3>",  "\n I just don't know what to do"],
+			"V2": ["I have the ", "<N2>",  " inside of me, I can't help myself \n I ", "<V2>",  " and lose myself \n How can you just ", "<V1>",  " while I'm all alone?"]
+		}
+	},
+	{
+		"layout": {
+			"verbs": 1,
+			"nouns": 1,
+			"form": ["V1", "C1", "V2", "C2", "V3", "C3"]
+		},
+		"parts": {
+			"V1": ["The sun is shining and I'm feeling good \n The birds are singing and the sky is bright and blue \n Everything is alright since my ", "<N1>",  " loves me and that's just fine"],
+			"C1": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can hurt me when I'm with my ", "<N1>"," "],
+			"V2": ["While I ", "<V1>",  " and thrive, I see people are down \n They droop their heads, they wear a frown \n Buck up - it's okay, just find yourself a ", "<N1>",  " and all will be fine"],
+			"C2": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can touch me when I have my ", "<N1>"],
+			"V3": ["What did I do to deserve such a ", "<N1>", "? \n Happy forever so long as my ", "<N1>",  " and I are together \n ", "<N1>",  " I love you and so long as your mine I'll never be blue."],
+			"C3": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can hurt me when I'm with my ", "<N1>",  "\n Nothing can touch me when I'm with my ", "<N1>"]
+		}
+	}
+]
