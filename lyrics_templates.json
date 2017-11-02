@@ -31,11 +31,25 @@
 		},
 		"parts": {
 			"V1": ["The sun is shining and I'm feeling good \n The birds are singing and the sky is bright and blue \n Everything is alright since my ", "<N1>",  " loves me and that's just fine"],
-			"C1": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can hurt me when I'm with my ", "<N1>"," "],
+			"C1": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can hurt me when I'm with my ", "<N1>"],
 			"V2": ["While I ", "<V1>",  " and thrive, I see people are down \n They droop their heads, they wear a frown \n Buck up - it's okay, just find yourself a ", "<N1>",  " and all will be fine"],
 			"C2": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can touch me when I have my ", "<N1>"],
 			"V3": ["What did I do to deserve such a ", "<N1>", "? \n Happy forever so long as my ", "<N1>",  " and I are together \n ", "<N1>",  " I love you and so long as your mine I'll never be blue."],
 			"C3": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can hurt me when I'm with my ", "<N1>",  "\n Nothing can touch me when I'm with my ", "<N1>"]
+		}
+	},
+	{
+		"layout": {
+			"verbs": 2,
+			"nouns": 1,
+			"adjectives": 2,
+			"form": ["V1", "C1", "V2", "C1", "V3", "C1"]
+		},
+		"parts": {
+			"V1": ["Do you see that ", "<A1>", " ", "<N1>", " down the street? \n  That's the ", "<N1>", " that everyone's talkin' about. \n That ", "<A1>", " ", "<A2>", " ", "<N1>", " is the talk of the town!"],
+			"C1": ["See that see that ", "<N1>", ", that ", "<A1>", " and ", "<A2>", " ", "<N1>", "? \n Try to ", "<V1>", ", try to ", "<V2>", " \n But that ", "<N1>", " has got it down!"],
+			"V2": ["Many have tried to out ", "<V1>", " the ", "<N1>", " \n  But that ", "<A1>", " ", "<A2>", "<N1>", " just can't be beat. \n Just watch it  ", "<V2>", ", how it ", "<V2>", "s so well! \n There's a reason why it's the talk of the town."],
+			"V3": ["So next time you find yourself down the street \n Just watch your step, don't be so  ", "<A2>", " \n You're not as ", "<A1>", " as you might think. 'Coz this town belongs to the most ", "<A1>", " ", "<N1>", "!"]
 		}
 	}
 ]

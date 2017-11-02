@@ -12,6 +12,8 @@ import random
 import sys
 # NLTK apparently does not support verb conjugations, instead consider the following:
 # https://stackoverflow.com/questions/18942096/how-to-conjugate-a-verb-in-nltk-given-pos-tag
+# Library for verb conjugation: https://www.clips.uantwerpen.be/pattern
+from nltk.corpus import wordnet as wn
 
 class TemplateHandler:
 	def __init__(self):
@@ -21,8 +23,8 @@ class TemplateHandler:
 		self.mapping_word_types = {
 		'nouns':'N',
 		'verbs': 'V',
-		'adjectives': 'ADJ',
-		'adverbs': 'ADV'}
+		'adjectives': 'A',
+		'adverbs': 'R'}
 
 	# Reads in lyrics_templates.json and converts it into
 	# a python dictionary by setting global variable d_templates
@@ -61,19 +63,61 @@ class TemplateHandler:
 					# Copy user input
 					given = d_input[t]
 					# Copy user input as needed
-					words = [w for w in given]
+					words = []
+					for w in given:
+						words.append(w)
 					random.shuffle(words) # shuffle word order
 
 				# Assign to mapping
-				for i in range(num_needed):
+				for i in range(0, num_needed):
 					# create mapping key (ex. N1)
-					key = ''.join([self.getWordTypeSymbol(t), str(i+1)])
+					word_type_symbol = self.getWordTypeSymbol(t) # get mapping key: N, V, A (adj), R (adverb)
+					key = ''.join([word_type_symbol, str(i+1)]) # create key: A1, V2, etc.
+					
+					# Add set user input word to mapping
 					if len(words) > 0:
 						mapping[key] = words.pop()
+					# If no more words available, add a randomly generated word based on inputted words
 					else:
-						# Add randomly generated word
-						mapping[key] = '**GENERATE RANDOM**'
+						if len(given) != 0:
+							rand_word = self.getRandomWord(given[random.randint(0, len(given)-1)], word_type_symbol.lower())
+							mapping[key] = rand_word
+						# ** FILL IN IF OPTION FOR NO USER INPUT FOR THE WORD TYPE
+						else:
+							mapping[key] = '**GENERATE RANDOM**'
+
 		return mapping
+
+	# Returns a synset restricted by POS for a given word if available, else same word
+	# @param 	string word
+	# @param 	string pos ('v', 'n', 'a', 'r')
+	# @return 	string generated word
+	def getRandomWord(self, word, pos):
+		# Get synsets of all words
+		synsets = wn.synsets(word, pos=pos.lower())
+		
+		# Similar words available
+		if len(synsets) != 0: 
+			random.shuffle(synsets) # randomize synsets
+
+			# Try to get a random word from the synset
+			for syn in synsets:
+				similar_words = syn.lemma_names() # return lemmas of similar words
+
+				# Available lemmas
+				if len(similar_words) != 0:
+					random.shuffle(similar_words) # randomize synset lemmas
+					rand_word = similar_words.pop()
+					
+					# Get a random word lemma
+					while (rand_word == word) and (len(similar_words) != 0):
+						rand_word = similar_words.pop()
+						if rand_word != word:
+							return rand_word
+			
+		# Similar words not available, return same word
+		return word
+
 
 
 	# Retrieves key symbol from token for mapping
@@ -113,7 +157,7 @@ class TemplateHandler:
 			# Iterate through list of tokens of song part
 			part_lyrics = []
 			for token in part:
-				# Get mapping symbol if so
+				# Get mapping symbol if encountered substitution string
 				if token[0] == '<':
 					key_type = self.getKeyType(token)
 					word_type = d_mapping[key_type]
@@ -125,14 +169,9 @@ class TemplateHandler:
 
 				# Else predefined lyrical line, add to lyrics
 				else:
-					# print('Token')
-					# print(token)
 					part_lyrics.append(token)
 
-			# print(part_lyrics)
 			complete_part = ''.join(part_lyrics)
-			# print('Complete Part')
-			# print(complete_part)
 			lyrics.append(complete_part)
 
 		complete_lyrics = '\n \n'.join(lyrics) # separate parts by new line
@@ -148,6 +187,8 @@ class TemplateHandler:
 
 		# Pick a random template dictionary
 		d_template = self.d_templates[random.randint(0, len(self.d_templates)-1)]
+		# UNCOMMENT TO SELECT THE LAST TEMPLATE
+		#d_template = self.d_templates[-1]
 
 		# Create a dictionary mapping user input to a particular key in template
 		d_input_mapping = self.createInputMapping(d_user_input, d_template['layout'])

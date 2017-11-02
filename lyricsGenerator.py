@@ -9,9 +9,10 @@ Driver program for our lyrics generator.
 
 import re
 import sys
+import lyricsTemplateHandler as lth
 
 
-class UserInput:
+class UserInputHandler:
 	'''
 	Outputs user input in a dictionary format of part in speech:list of words format
 	'''
@@ -29,26 +30,20 @@ class UserInput:
 
 	# Initiates user input
 	def askForUserInput(self):
-		print('''
-	Welcome to the NLP Lyrics Generator!
-	Generating the next greatest hit since 2017.
-
-	Please enter input according to the following prompts.
-	** NOTE: If you do not enter input as exactly specified, you might get some...odd songs! **
-			''')
-
+		# reset user input
 		ls_input_verbs = []
 		ls_input_nouns = []
+		ls_input_adjectives = []
 
-		userInputsVerbs = userInputsNouns = True
-		self.d_input = {'verbs':[], 'nouns':[]} # reset user input
+		userInputsVerbs = userInputsNouns = userInputsAdjectives = True
+		self.d_input = {'verbs':[], 'nouns':[], 'adjectives': []} # reset user input
 
 
 		# Main loop to get input
 		while True:
 			# Get verbs
 			while userInputsVerbs:
-				input_verbs = input("Enter up to three verbs separated by spaces, or 0 to exit: ")
+				input_verbs = raw_input("Enter up to three verbs separated by spaces, or 0 to exit: ")
 				input_verbs.strip()
 				# Check if exit
 				if input_verbs.strip() == '0':
@@ -71,7 +66,7 @@ class UserInput:
 
 			# Get nouns
 			while userInputsNouns:
-				input_nouns = input("Enter up to three nouns separated by spaces, or 0 to exit: ")
+				input_nouns = raw_input("Enter up to three nouns separated by spaces, or 0 to exit: ")
 				
 				# Check if exit
 				if input_nouns.strip() == '0':
@@ -83,7 +78,7 @@ class UserInput:
 					print("Error! More than 3 nouns were entered")
 				# No verbs
 				elif len(ls_input_nouns) == 0:
-					print("No verbs were entered.")
+					print("No nouns were entered.")
 				else:
 					if not self.isValidInput(ls_input_nouns):
 						print("Invalid character detected in input. Please try again.")
@@ -91,8 +86,33 @@ class UserInput:
 						# Add nouns to input dictionary
 						self.d_input['nouns'] = ls_input_nouns
 						userInputsNouns = False
+			
+			# Get adjectives
+			while userInputsAdjectives:
+				input_adjectives = raw_input("Enter up to three adjectives separated by spaces, or 0 to exit: ")
+				
+				# Check if exit
+				if input_adjectives.strip() == '0':
+					sys.exit()
+				ls_input_adjectives = input_adjectives.strip().split(" ")
+				
+				# More than 3 verbs
+				if len(ls_input_adjectives) > 3:
+					print("Error! More than 3 adjectives were entered")
+				# No verbs
+				elif len(ls_input_adjectives) == 0:
+					print("No adjectives were entered.")
+				else:
+					if not self.isValidInput(ls_input_adjectives):
+						print("Invalid character detected in input. Please try again.")
+					else:
+						# Add adjectives to input dictionary
+						self.d_input['adjectives'] = ls_input_adjectives
+						userInputsAdjectives = False
+
 			print('\n')
-			break
+			break;
+			
 
 	# Returns dictionary containing user input
 	def getUserInput(self):
@@ -106,14 +126,29 @@ class UserInput:
 
 
 
-
+# Driver of lyrics generator
 def main():
-	user_input = UserInput()
-	user_input.askForUserInput()
-	
+	# Initialize handlers
 
-	# Do some awesome thing with the user input
-	handler = lyr
+	input_handler = UserInputHandler()
+	template_handler = lth.TemplateHandler()
+	
+	# Print welcome message
+	print('''
+Welcome to the NLP Lyrics Generator!
+Generating the next greatest hit since 2017.
+
+Please enter input according to the following prompts.
+** NOTE: If you do not enter input as exactly specified, you might get some...odd songs! **
+	''')
+
+	while True:
+		input_handler.askForUserInput()
+		user_input = input_handler.getUserInput()
+		# Do some awesome thing with the user input
+		lyrics = template_handler.generateLyrics(user_input)
+		print(lyrics)
+		print('\n')
 
 
 if __name__ == '__main__':
