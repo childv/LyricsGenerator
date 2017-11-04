@@ -4,6 +4,7 @@ lyricsGenerator.py
 
 
 Driver program for our lyrics generator.
+Operates in Python 2
 
 '''
 
@@ -18,7 +19,7 @@ class UserInputHandler:
 	'''
 	def __init__(self):
 		self.d_input = None
-		self.invalid_chars = re.compile("[^a-zA-Z]")
+		self.invalid_chars = re.compile(".*[^a-zA-Z-]+.*")
 
 	# Ensures input has no numbers or grammars
 	def isValidInput(self, ls_str):
@@ -34,9 +35,10 @@ class UserInputHandler:
 		ls_input_verbs = []
 		ls_input_nouns = []
 		ls_input_adjectives = []
+		ls_input_adverbs = []
 
-		userInputsVerbs = userInputsNouns = userInputsAdjectives = True
-		self.d_input = {'verbs':[], 'nouns':[], 'adjectives': []} # reset user input
+		userInputsVerbs = userInputsNouns = userInputsAdjectives = userInputsAdverbs = True
+		self.d_input = {'verbs':[], 'nouns':[], 'adjectives': [], 'adverbs': []} # reset user input
 
 
 		# Main loop to get input
@@ -48,13 +50,14 @@ class UserInputHandler:
 				# Check if exit
 				if input_verbs.strip() == '0':
 					sys.exit()
+
 				ls_input_verbs = input_verbs.strip().split(" ")
 				
 				# More than 3 verbs
 				if len(ls_input_verbs) > 3:
 					print("Error! More than 3 verbs were entered")
 				# No verbs
-				elif len(ls_input_verbs) == 0:
+				elif ls_input_verbs[0] == '':
 					print("No verbs were entered.")
 				else:
 					if not self.isValidInput(ls_input_verbs):
@@ -77,7 +80,7 @@ class UserInputHandler:
 				if len(ls_input_nouns) > 3:
 					print("Error! More than 3 nouns were entered")
 				# No verbs
-				elif len(ls_input_nouns) == 0:
+				elif ls_input_nouns[0] == '':
 					print("No nouns were entered.")
 				else:
 					if not self.isValidInput(ls_input_nouns):
@@ -100,7 +103,7 @@ class UserInputHandler:
 				if len(ls_input_adjectives) > 3:
 					print("Error! More than 3 adjectives were entered")
 				# No verbs
-				elif len(ls_input_adjectives) == 0:
+				elif ls_input_adjectives[0] == '':
 					print("No adjectives were entered.")
 				else:
 					if not self.isValidInput(ls_input_adjectives):
@@ -109,6 +112,29 @@ class UserInputHandler:
 						# Add adjectives to input dictionary
 						self.d_input['adjectives'] = ls_input_adjectives
 						userInputsAdjectives = False
+			
+			# Get adverbs
+			while userInputsAdverbs:
+				input_adverbs = raw_input("Enter up to three adverbs separated by spaces, or 0 to exit: ")
+				
+				# Check if exit
+				if input_adverbs.strip() == '0':
+					sys.exit()
+				ls_input_adverbs = input_adverbs.strip().split(" ")
+				
+				# More than 3 verbs
+				if len(ls_input_adverbs) > 3:
+					print("Error! More than 3 adverbs were entered")
+				# No verbs
+				elif ls_input_adverbs[0] == '':
+					print("No adverbs were entered.")
+				else:
+					if not self.isValidInput(ls_input_adjectives):
+						print("Invalid character detected in input. Please try again.")
+					else:
+						# Add adjectives to input dictionary
+						self.d_input['adverbs'] = ls_input_adverbs
+						userInputsAdverbs = False
 
 			print('\n')
 			break;

@@ -1,8 +1,10 @@
 '''
 lyricsTemplateReader.py
 10/25/17
+Veronica Child
 
-Takes in user input and outputs lyrics by selecting a random template
+Takes in user input and outputs lyrics by selecting a random template and inserting direct user input and
+random lyrics
 
 '''
 
@@ -26,6 +28,7 @@ class TemplateHandler:
 		'adjectives': 'A',
 		'adverbs': 'R'}
 
+
 	# Reads in lyrics_templates.json and converts it into
 	# a python dictionary by setting global variable d_templates
 	def readTemplates(self):
@@ -45,6 +48,7 @@ class TemplateHandler:
 	# @return 		string word initial type
 	def getWordTypeSymbol(self, word_type):
 		return self.mapping_word_types[word_type]
+
 
 	# Creates mapping of user input to a particular symbol
 	# @param 	d_input 	dictionary of word type : user input
@@ -79,14 +83,11 @@ class TemplateHandler:
 						mapping[key] = words.pop()
 					# If no more words available, add a randomly generated word based on inputted words
 					else:
-						if len(given) != 0:
-							rand_word = self.getRandomWord(given[random.randint(0, len(given)-1)], word_type_symbol.lower())
-							mapping[key] = rand_word
-						# ** FILL IN IF OPTION FOR NO USER INPUT FOR THE WORD TYPE
-						else:
-							mapping[key] = '**GENERATE RANDOM**'
+						rand_word = self.getRandomWord(given[random.randint(0, len(given)-1)], word_type_symbol.lower())
+						mapping[key] = rand_word
 
 		return mapping
+
 
 	# Returns a synset restricted by POS for a given word if available, else same word
 	# @param 	string word
@@ -107,17 +108,22 @@ class TemplateHandler:
 				# Available lemmas
 				if len(similar_words) != 0:
 					random.shuffle(similar_words) # randomize synset lemmas
-					rand_word = similar_words.pop()
-					
 					# Get a random word lemma
+					rand_word = similar_words.pop()
+					rand_word = rand_word.replace("_", " ") # clean up string
+					
+					# Continue to get another word if it's the same
 					while (rand_word == word) and (len(similar_words) != 0):
 						rand_word = similar_words.pop()
+						rand_word = rand_word.strip()
 						if rand_word != word:
+							rand_word = rand_word.replace("_", " ") # clean up string
 							return rand_word
+					
+					return rand_word
 			
 		# Similar words not available, return same word
 		return word
-
 
 
 	# Retrieves key symbol from token for mapping
@@ -177,6 +183,7 @@ class TemplateHandler:
 		complete_lyrics = '\n \n'.join(lyrics) # separate parts by new line
 		return complete_lyrics
 
+
 	# Generate template-based lyrics
 	# @param user_input 	dictionary containing user input of different POS
 	# @return 				string lyrics
@@ -187,7 +194,7 @@ class TemplateHandler:
 
 		# Pick a random template dictionary
 		d_template = self.d_templates[random.randint(0, len(self.d_templates)-1)]
-		# UNCOMMENT TO SELECT THE LAST TEMPLATE
+		# ** COMMENT OUT ABOVE AND UNCOMMENT BELOW TO SELECT A SPECIFIC TEMPLATE (index by position)**
 		#d_template = self.d_templates[-1]
 
 		# Create a dictionary mapping user input to a particular key in template
