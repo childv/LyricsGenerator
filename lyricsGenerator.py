@@ -45,7 +45,7 @@ class UserInputHandler:
 		while True:
 			# Get verbs
 			while userInputsVerbs:
-				input_verbs = raw_input("Enter up to three verbs separated by spaces, or 0 to exit: ")
+				input_verbs = raw_input("Enter up to three present tense verbs separated by spaces, or 0 to exit: ")
 				input_verbs.strip()
 				# Check if exit
 				if input_verbs.strip() == '0':
@@ -165,6 +165,7 @@ Welcome to the NLP Lyrics Generator!
 Generating the next greatest hit since 2017.
 
 Please enter input according to the following prompts.
+Enter 0 at any time to exit the program. 
 ** NOTE: If you do not enter input as exactly specified, you might get some...odd songs! **
 	''')
 

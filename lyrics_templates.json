@@ -1,14 +1,14 @@
 [
 	{
 		"layout": {
-			"verbs": 2,
+			"verbs": 3,
 			"nouns": 1,
 			"adjectives": 1,
 			"adverbs": 1,
 			"form": ["V1", "C1", "V2", "C1"]
 		},
 		"parts": {
-			"V1":["I got a ",  "<N1>", " that I really need \n My ", "<N1>", " is what I breathe \n But my ", "<N1>", " don't love me, so I gotta leave"],
+			"V1":["I got a ",  "<N1>", " that I really need \n My ", "<N1>", " is what I  ", "<V3>", " \n But my ", "<N1>", " don't love me, so I gotta leave"],
 			"C1": ["Oh ", "<N1>", " oh ", "<N1>", " don't you see me ", "<V1>",  "\n Oh ", "<N1>", " oh ", "<N1>", " when you ", "<R1>", " ", "<V2>",  " it makes me ", "<A1>", "\n Oh ", "<N1>", " oh ", "<N1>", " I'm ", "<V1>", "ing over how you ", "<V2>"],
 			"V2": ["My ", "<N1>",  " once needed me \n My ", "<N1>",  " once loved me \n But when you see your ", "<N1>", " ", "<V2>", " you'll understand - you gotta leave too"]
 		}
@@ -29,15 +29,15 @@
 	},
 	{
 		"layout": {
-			"verbs": 1,
+			"verbs": 4,
 			"nouns": 2,
-			"adjectives": 2, 
+			"adjectives": 3, 
 			"adverbs": 1,
-			"form": ["V1", "C1", "V2", "C2", "V3", "C3"]
+			"form": ["V1", "C1", "V2", "C1", "V3", "C1"]
 		},
 		"parts": {
-			"V1": ["The sun is shining and I'm feeling ", "<A1>", "\n The birds are singing and the sky is bright and blue \n Everything is alright since my ", "<N1>",  " loves me and that's just fine"],
-			"C1": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can hurt me when I'm with my ", "<N1>"],
+			"V1": ["The sun is shining and I'm feeling ", "<A1>", "\n The birds ", "<V2>", " and the sky is bright and ", "<A3>", " \n Everything is alright since my ", "<N1>",  " loves me and that's just fine"],
+			"C1": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to ", "<V3>", ", I dare you to ", "<V4>", " \n Nothing can hurt me when I'm with my ", "<N1>"],
 			"V2": ["While I ", "<R1>", " ", "<V1>",  " and thrive, I see people are down \n They droop their heads, they wear a frown \n Buck up - it's okay, just find yourself a ", "<N1>",  " and all will be fine"],
 			"C2": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can touch me when I have my ", "<N1>"],
 			"V3": ["What did I do to deserve such a ", "<N2>", "? \n Happy forever so long as my ", "<N1>",  " and I are together \n ", "<N1>",  " I love you and so long as your mine I'll never be ", "<A2>", "."],
