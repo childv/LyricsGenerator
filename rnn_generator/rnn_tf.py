@@ -120,20 +120,23 @@ def decode_embed(array, vocab):
 
 ckpt_file = ""
 TEST_PREFIX = "The " # Prefix to prompt the network in test mode
+LEN_TEST_TEXT = 750
 
-print("Usage:")
-print('\t\t ', sys.argv[0], ' [ckpt model to load] [prefix, e.g., "The "]')
+print("Usage:", sys.argv[0], ' [ckpt model to load] [prefix, e.g., "The "] [line char length, e.g., 100]')
 if len(sys.argv)>=2:
 	ckpt_file=sys.argv[1]
-if len(sys.argv)==3:
+if len(sys.argv)>=3:
 	TEST_PREFIX = sys.argv[2]
+if len(sys.argv)==4:
+	LEN_TEST_TEXT = int(sys.argv[3]) # Number of test characters of text to generate after training the network
+
 
 
 
 
 ## Load the data
 data_ = ""
-with open('../billboard_lyrics_1964_2015.csv', 'r', errors='ignore') as f:
+with open('../billboard_lyrics_1964-2015.csv', 'r', errors='ignore') as f:
 	lyrics = csv.reader(f, delimiter=',')
 	for row in lyrics:
 		data_ += row[4]
@@ -153,8 +156,6 @@ batch_size = 64 #128
 time_steps = 100 #50
 
 NUM_TRAIN_BATCHES = 10000
-
-LEN_TEST_TEXT = 50 # Number of test characters of text to generate after training the network
 
 
 
@@ -217,18 +218,16 @@ if ckpt_file != "":
 	saver.restore(sess, ckpt_file)
 
 print("SENTENCE:")
-for row in range(10):
-	TEST_PREFIX = TEST_PREFIX.lower()
-	for i in range(len(TEST_PREFIX)):
-		out = net.run_step( embed_to_vocab(TEST_PREFIX[i], vocab) , i==0)
+TEST_PREFIX = TEST_PREFIX.lower()
+for i in range(len(TEST_PREFIX)):
+	out = net.run_step( embed_to_vocab(TEST_PREFIX[i], vocab) , i==0)
 
-	gen_str = TEST_PREFIX
-	for i in range(LEN_TEST_TEXT):
-		element = np.random.choice( range(len(vocab)), p=out ) # Sample character from the network according to the generated output probabilities
-		gen_str += vocab[element]
+gen_str = TEST_PREFIX
+for i in range(LEN_TEST_TEXT):
+	element = np.random.choice( range(len(vocab)), p=out ) # Sample character from the network according to the generated output probabilities
+	gen_str += vocab[element]
 
-		out = net.run_step( embed_to_vocab(vocab[element], vocab) , False )
-	print(gen_str)
-
+	out = net.run_step( embed_to_vocab(vocab[element], vocab) , False )
+print(gen_str)
 
 
