@@ -4,7 +4,9 @@ lyricsTemplateReader.py
 Veronica Child
 
 Takes in user input and outputs lyrics by selecting a random template and inserting direct user input and
-random lyrics
+random lyrics.
+
+** Must be run in Python 3
 
 '''
 
@@ -16,6 +18,7 @@ import sys
 # https://stackoverflow.com/questions/18942096/how-to-conjugate-a-verb-in-nltk-given-pos-tag
 # Library for verb conjugation: https://www.clips.uantwerpen.be/pattern
 from nltk.corpus import wordnet as wn
+from pattern.en import conjugate
 
 class TemplateHandler:
 	def __init__(self):
@@ -62,7 +65,7 @@ class TemplateHandler:
 				num_needed = layout[t] # get number of word types needed
 				
 				words = []
-				# Needed word type not defined by user, generate own
+				# Gets available user input
 				if t in d_input:
 					# Copy user input
 					given = d_input[t]
@@ -81,7 +84,12 @@ class TemplateHandler:
 					# Add set user input word to mapping
 					if len(words) > 0:
 						mapping[key] = words.pop()
-					# If no more words available, add a randomly generated word based on inputted words
+
+						# Converts user input to present tense if verb
+						if key == 'V':
+							mapping[key] = self.conjugateVerb(mapping[key], 'inf')
+
+					# If no more user input words available, add a randomly generated word based on prior inputted words
 					else:
 						rand_word = self.getRandomWord(given[random.randint(0, len(given)-1)], word_type_symbol.lower())
 						mapping[key] = rand_word
@@ -89,9 +97,19 @@ class TemplateHandler:
 		return mapping
 
 
+	# Conjugates variable given a tense. Tenses can be inf, 1 - 3sg, pl, and part.
+	# Replace 'p' with 'inf' or add a 'p' to any other tense to get the past tense
+	# @param verb 	string verb
+	# @param tense 	string indicating tense
+	# @return 		string conjugated verb
+	def conjugateVerb(self, verb, tense):
+		conjugated = conjugate(verb, tense)
+		return conjugated
+
+
 	# Returns a synset restricted by POS for a given word if available, else same word
-	# @param 	string word
-	# @param 	string pos ('v', 'n', 'a', 'r')
+	# @param word 	string word
+	# @param pos	string pos ('v', 'n', 'a', 'r')
 	# @return 	string generated word
 	def getRandomWord(self, word, pos):
 		# Get synsets of all words
@@ -135,7 +153,7 @@ class TemplateHandler:
 		char = token[i]
 
 		# Retrieve symbol
-		while char != '>' and (i < len(token)):
+		while char != '>' and (char != ':') and (i < len(token)):
 			key_type.append(char)
 			i += 1
 			char = token[i]
@@ -167,7 +185,12 @@ class TemplateHandler:
 				if token[0] == '<':
 					key_type = self.getKeyType(token)
 					word_type = d_mapping[key_type]
-					# *** MODIFY WORD TO FIT CONTEXT OF SENTENCE ***
+
+					# Conjugate verb if needed
+					if (key_type[0] == 'V') and (':' in token):
+						tense = token[token.index(':')+1: -1]
+						word_type = self.conjugateVerb(word_type, tense)
+					# *** OPTIONAL: MODIFY WORD TO FIT CONTEXT OF SENTENCE ***
 					# print('Word type: ')
 					# print(word_type)
 					
@@ -201,7 +224,6 @@ class TemplateHandler:
 		d_input_mapping = self.createInputMapping(d_user_input, d_template['layout'])
 
 		complete_lyrics = self.completeLyrics(d_input_mapping, d_template)
-
 
 		return complete_lyrics.strip()
 
