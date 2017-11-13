@@ -19,6 +19,7 @@ import sys
 # Library for verb conjugation: https://www.clips.uantwerpen.be/pattern
 from nltk.corpus import wordnet as wn
 from pattern.en import conjugate
+from nltk import word_tokenize, pos_tag
 
 class TemplateHandler:
 	def __init__(self):
@@ -30,6 +31,10 @@ class TemplateHandler:
 		'verbs': 'V',
 		'adjectives': 'A',
 		'adverbs': 'R'}
+
+		# Initialize synset of template types
+		self.happy_synset = wn.synsets('happy', 'a')[0]
+		self.sad_synset = wn.synsets('sad', 'a')[0]
 
 
 	# Reads in lyrics_templates.json and converts it into
@@ -91,8 +96,17 @@ class TemplateHandler:
 
 					# If no more user input words available, add a randomly generated word based on prior inputted words
 					else:
-						rand_word = self.getRandomWord(given[random.randint(0, len(given)-1)], word_type_symbol.lower())
-						mapping[key] = rand_word
+						# Attempts to generate a random word
+						foundRandom = False
+						for i in range(len(given)):
+							rand_word = self.getRandomWord(given[random.randint(0, len(given)-1)], word_type_symbol.lower())
+							if rand_word is not None:
+								mapping[key] = rand_word
+								found_random = True
+								break
+						# No random word available, reassign a word from given
+						if found_random is False:
+							mapping[key] = given[random.randint(0, len(given)-1)]
 
 		return mapping
 
@@ -188,17 +202,16 @@ class TemplateHandler:
 
 					# Conjugate verb if needed
 					if (key_type[0] == 'V') and (':' in token):
-						tense = token[token.index(':')+1: -1]
+						tense = token[token.index(':')+1: -1] # get tense
 						word_type = self.conjugateVerb(word_type, tense)
-					# *** OPTIONAL: MODIFY WORD TO FIT CONTEXT OF SENTENCE ***
-					# print('Word type: ')
-					# print(word_type)
 					
 					part_lyrics.append(word_type)
 
 				# Else predefined lyrical line, add to lyrics
 				else:
 					part_lyrics.append(token)
+
+			# Include none check for join?
 
 			complete_part = ''.join(part_lyrics)
 			lyrics.append(complete_part)
@@ -207,18 +220,68 @@ class TemplateHandler:
 		return complete_lyrics
 
 
+	# Returns most similar template genre based on user input and similarity score
+	# @param d_user_input	dictionary containing user input of different POS
+	# @return 				string name of template form to use
+	def getMostSimilarTemplate(self, d_user_input):
+		# Collect list of user input
+		synset_list = []
+		for key in d_user_input:
+			# Get part of speech tag for word net
+			pos = self.getWordTypeSymbol(key).lower()
+			for word in d_user_input[key]:
+				# Get synset of tagged words if possible
+				try:
+					synset = wn.synsets(word, pos)[0]
+					# Filter out Nones
+					synset_list.append(synset)
+				except:
+					pass
+
+		# For each word of the user input
+		# HAPPY
+		happy_score = 0.0
+		count = 0
+		for synset in synset_list:
+			s = synset.path_similarity(self.happy_synset)
+			if s is not None:
+				happy_score += s
+				count += 1
+		happy_score = happy_score / count
+		
+		# SAD
+		sad_score = 0.0
+		count = 0
+		for synset in synset_list:
+			s = synset.path_similarity(self.sad_synset)
+			if s is not None:
+				sad_score += s
+				count += 1
+		sad_score = sad_score / count
+
+		# Return template type based on score similarity
+		if sad_score < happy_score:
+			template_type = 'happy'
+		elif sad_score > happy_score:
+			template_type = 'sad'
+		else:
+			template_type = random.choice(['happy', 'sad'])
+		return template_type
+
+
 	# Generate template-based lyrics
-	# @param user_input 	dictionary containing user input of different POS
+	# @param d_user_input 	dictionary containing user input of different POS
 	# @return 				string lyrics
 	def generateLyrics(self, d_user_input):
+		template_type = self.getMostSimilarTemplate(d_user_input)
 		# Read templates if not initiated
 		if self.d_templates is None:
 			self.readTemplates()
 
-		# Pick a random template dictionary
-		d_template = self.d_templates[random.randint(0, len(self.d_templates)-1)]
-		# ** COMMENT OUT ABOVE AND UNCOMMENT BELOW TO SELECT A SPECIFIC TEMPLATE (index by position)**
-		#d_template = self.d_templates[-1]
+		# Pick a template based on sentiment of user input
+		d_template = self.d_templates[template_type][random.randint(0, len(self.d_templates)-1)]
+		# ** COMMENT OUT ABOVE AND UNCOMMENT BELOW TO SELECT A SPECIFIC TEMPLATE specify type and index**
+		#d_template = self.d_templates[template_type][-1]
 
 		# Create a dictionary mapping user input to a particular key in template
 		d_input_mapping = self.createInputMapping(d_user_input, d_template['layout'])

@@ -1,62 +1,81 @@
-[
-	{
-		"layout": {
-			"verbs": 3,
-			"nouns": 1,
-			"adjectives": 1,
-			"adverbs": 1,
-			"form": ["V1", "C1", "V2", "C1"]
+{
+	"sad": [
+		{
+			"layout": {
+				"verbs": 3,
+				"nouns": 1,
+				"adjectives": 1,
+				"adverbs": 1,
+				"form": ["V1", "C1", "V2", "C1"]
+			},
+			"parts": {
+				"V1":["I got a ",  "<N1>", " that I really need \n My ", "<N1>", " is what I  ", "<V3>", " \n But my ", "<N1>", " don't love me, so I gotta leave"],
+				"C1": ["Oh ", "<N1>", " oh ", "<N1>", " don't you see me ", "<V1>",  "\n Oh ", "<N1>", " oh ", "<N1>", " when you ", "<R1>", " ", "<V2>",  " it makes me ", "<A1>", "\n Oh ", "<N1>", " oh ", "<N1>", " I'm ", "<V1:part>", " over how you ", "<V2>"],
+				"V2": ["My ", "<N1>",  " once needed me \n My ", "<N1>",  " once loved me \n But when you see your ", "<N1>", " ", "<V2>", " you'll understand - you gotta leave too"]
+			}
 		},
-		"parts": {
-			"V1":["I got a ",  "<N1>", " that I really need \n My ", "<N1>", " is what I  ", "<V3>", " \n But my ", "<N1>", " don't love me, so I gotta leave"],
-			"C1": ["Oh ", "<N1>", " oh ", "<N1>", " don't you see me ", "<V1>",  "\n Oh ", "<N1>", " oh ", "<N1>", " when you ", "<R1>", " ", "<V2>",  " it makes me ", "<A1>", "\n Oh ", "<N1>", " oh ", "<N1>", " I'm ", "<V1:part>", " over how you ", "<V2>"],
-			"V2": ["My ", "<N1>",  " once needed me \n My ", "<N1>",  " once loved me \n But when you see your ", "<N1>", " ", "<V2>", " you'll understand - you gotta leave too"]
+		{
+			"layout": {
+				"verbs": 2,
+				"nouns": 3,
+				"adjectives": 2,
+				"adverbs": 1,
+				"form": ["V1", "C1", "V2"]
+			},
+			"parts": {
+				"V1": ["I waited by your ", "<N1>",  " for an hour or more \n But you didn't ", "<V1>",  "\n I promise I'm not a ", "<N2>",  "\n But something about you makes me want to ", "<V2>", " ", "<R1>"],
+				"C1": ["When you're not ", "<V1>",  "ing with me, baby I feel so ", "<A1>", "\n I turn into a ", "<N2>",  " in a ", "<N3>",  "\n I just don't know what to do"],
+				"V2": ["I have the ", "<N2>",  " inside of me, I can't help myself \n I ", "<V2>",  " and lose myself \n How can you just ", "<V1>",  " while I'm ", "<A2>", "?"]
+			}
 		}
-	},
-	{
-		"layout": {
-			"verbs": 2,
-			"nouns": 3,
-			"adjectives": 2,
-			"adverbs": 1,
-			"form": ["V1", "C1", "V2"]
+	],
+	"happy": [
+		{
+			"layout": {
+				"verbs": 4,
+				"nouns": 2,
+				"adjectives": 3, 
+				"adverbs": 1,
+				"form": ["V1", "C1", "V2", "C1", "V3", "C1"]
+			},
+			"parts": {
+				"V1": ["The sun is shining and I'm feeling ", "<A1>", "\n The birds ", "<V2>", " and the sky is bright and ", "<A3>", " \n Everything is alright since my ", "<N1>",  " loves me and that's just fine"],
+				"C1": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to ", "<V3>", ", I dare you to ", "<V4>", " \n Nothing can hurt me when I'm with my ", "<N1>"],
+				"V2": ["While I ", "<R1>", " ", "<V1>",  " and thrive, I see people are down \n They droop their heads, they wear a frown \n Buck up - it's okay, just find yourself a ", "<N1>",  " and all will be fine"],
+				"C2": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can touch me when I have my ", "<N1>"],
+				"V3": ["What did I do to deserve such a ", "<N2>", "? \n Happy forever so long as my ", "<N1>",  " and I are together \n ", "<N1>",  " I love you and so long as your mine I'll never be ", "<A2>", "."],
+				"C3": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can hurt me when I'm with my ", "<N1>",  "\n Nothing can touch me when I'm with my ", "<N1>"]
+			}
 		},
-		"parts": {
-			"V1": ["I waited by your ", "<N1>",  " for an hour or more \n But you didn't ", "<V1>",  "\n I promise I'm not a ", "<N2>",  "\n But something about you makes me want to ", "<V2>", " ", "<R1>"],
-			"C1": ["When you're not ", "<V1>",  "ing with me, baby I feel so ", "<A1>", "\n I turn into a ", "<N2>",  " in a ", "<N3>",  "\n I just don't know what to do"],
-			"V2": ["I have the ", "<N2>",  " inside of me, I can't help myself \n I ", "<V2>",  " and lose myself \n How can you just ", "<V1>",  " while I'm ", "<A2>", "?"]
-		}
-	},
-	{
-		"layout": {
-			"verbs": 4,
-			"nouns": 2,
-			"adjectives": 3, 
-			"adverbs": 1,
-			"form": ["V1", "C1", "V2", "C1", "V3", "C1"]
+		{
+			"layout": {
+				"verbs": 3,
+				"nouns": 2,
+				"adjectives": 2,
+				"adverbs": 1,
+				"form": ["V1", "C1", "V2", "C1", "V3", "C1"]
+			},
+			"parts": {
+				"V1": ["Do you see that ", "<A1>", " ", "<N1>", " down the street? \n  That's the ", "<N1>", " that everyone's talkin' about. \n That ", "<A1>", ", ", "<A2>", " ", "<N1>", " is the talk of the town!"],
+				"C1": ["See that ", "<N1>", ", that ", "<A1>", " and ", "<A2>", " ", "<N2>", "? \n Try to ", "<V1>", ", try to ", "<V2>", " \n But that ", "<N1>", " has got it down!"],
+				"V2": ["Many have tried to out ", "<V3>", " the ", "<N1>", " \n  But that ", "<A1>", " ", "<A2>", "<N1>", " just can't be beat. \n Just watch it ", "<V2>", ", how it ", "<R1>", " ", "<V2:3sg>", " so well! \n There's a reason why it's the talk of the town."],
+				"V3": ["So next time you find yourself down the street \n Just watch your step, don't be so ", "<A2>", " \n You're not as ", "<A1>", " as you might think. 'Coz this town belongs to the most ", "<A1>", " ", "<N1>", "!"]
+			}
 		},
-		"parts": {
-			"V1": ["The sun is shining and I'm feeling ", "<A1>", "\n The birds ", "<V2>", " and the sky is bright and ", "<A3>", " \n Everything is alright since my ", "<N1>",  " loves me and that's just fine"],
-			"C1": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to ", "<V3>", ", I dare you to ", "<V4>", " \n Nothing can hurt me when I'm with my ", "<N1>"],
-			"V2": ["While I ", "<R1>", " ", "<V1>",  " and thrive, I see people are down \n They droop their heads, they wear a frown \n Buck up - it's okay, just find yourself a ", "<N1>",  " and all will be fine"],
-			"C2": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can touch me when I have my ", "<N1>"],
-			"V3": ["What did I do to deserve such a ", "<N2>", "? \n Happy forever so long as my ", "<N1>",  " and I are together \n ", "<N1>",  " I love you and so long as your mine I'll never be ", "<A2>", "."],
-			"C3": ["Life is good, life is fine with my ", "<N1>",  " at my side \n Just try to get me down, I dare you to make me blue \n Nothing can hurt me when I'm with my ", "<N1>",  "\n Nothing can touch me when I'm with my ", "<N1>"]
+			{
+			"layout": {
+				"verbs": 7,
+				"nouns": 5,
+				"adjectives": 4,
+				"adverbs": 3,
+				"form": ["V1", "C1", "V2", "C1", "V3", "C1"]
+			},
+			"parts": {
+				"V1": ["There's a ", "<N1>", " they call the ", "<A1>", ", ", "<A2>", " ", "<N2>", " \n It ", "<R1>", " ", "<V1:3sg>", " and it ", "<R2>", " ", "<V2:3sg>", " and never just ", "<V3:3sg>", " \n But there's one thing that ", "<N1>", " can't do. \n That's ", "<V1>", " my ", "<N3>", " since my ", "<N3>", " is mine."],
+				"C1": ["You can ", "<V1>", ", you can ", "<V2>", " like the ", "<A3>", " ", "<N1>", " \n But your ", "<A3>", " acts will steal my ", "<N3>", " away"],
+				"V2": ["There was a ", "<N4>", " they called the ", "<A1>", ", ", "<A4>", " ", "<N5>", "\n It ", "<R1>", " ", "<V4:3sgp>", " and it ", "<R2>", " ", "<V5:3sgp>", " and never just ", "<V6:3sgp>", " \n But there's one thing that ", "<N3>", " couldn't do. \n That was ", "<V4:3sgp>", " my ", "<N3>", ", and my ", "<N3>", " is mine."],
+				"V3": ["Did you say you're the ", "<N1>", " they called the ", "<A1>", ", ", "<A4>", " ", "<N5>", "\n You ", "<V5>", " and you ", "<V6>", " and never just ", "<R3>", " ", "<V7>", "? \n But there's one thing that you'll never do. \n That's ", "<V5>", " my ", "<N3>", ", since my ", "<N3>", " will always be mine!"]
+			}
 		}
-	},
-	{
-		"layout": {
-			"verbs": 3,
-			"nouns": 2,
-			"adjectives": 2,
-			"adverbs": 1,
-			"form": ["V1", "C1", "V2", "C1", "V3", "C1"]
-		},
-		"parts": {
-			"V1": ["Do you see that ", "<A1>", " ", "<N1>", " down the street? \n  That's the ", "<N1>", " that everyone's talkin' about. \n That ", "<A1>", ", ", "<A2>", " ", "<N1>", " is the talk of the town!"],
-			"C1": ["See that ", "<N1>", ", that ", "<A1>", " and ", "<A2>", " ", "<N2>", "? \n Try to ", "<V1>", ", try to ", "<V2>", " \n But that ", "<N1>", " has got it down!"],
-			"V2": ["Many have tried to out ", "<V3>", " the ", "<N1>", " \n  But that ", "<A1>", " ", "<A2>", "<N1>", " just can't be beat. \n Just watch it ", "<V2>", ", how it ", "<R1>", " ", "<V2:3sg>", " so well! \n There's a reason why it's the talk of the town."],
-			"V3": ["So next time you find yourself down the street \n Just watch your step, don't be so ", "<A2>", " \n You're not as ", "<A1>", " as you might think. 'Coz this town belongs to the most ", "<A1>", " ", "<N1>", "!"]
-		}
-	}
-]
+	]
+}
