@@ -9,7 +9,7 @@
 				"form": ["V1", "C1", "V2", "C1"]
 			},
 			"parts": {
-				"V1":["I got a ",  "<N1>", " that I really need \n My ", "<N1>", " is what I  ", "<V3>", " \n But my ", "<N1>", " don't love me, so I gotta leave"],
+				"V1":["I got a ",  "<N1>", " that I really need \n My ", "<N1>", " is what I ", "<V3>", " \n But my ", "<N1>", " don't love me, so I gotta leave"],
 				"C1": ["Oh ", "<N1>", " oh ", "<N1>", " don't you see me ", "<V1>",  "\n Oh ", "<N1>", " oh ", "<N1>", " when you ", "<R1>", " ", "<V2>",  " it makes me ", "<A1>", "\n Oh ", "<N1>", " oh ", "<N1>", " I'm ", "<V1:part>", " over how you ", "<V2>"],
 				"V2": ["My ", "<N1>",  " once needed me \n My ", "<N1>",  " once loved me \n But when you see your ", "<N1>", " ", "<V2>", " you'll understand - you gotta leave too"]
 			}
